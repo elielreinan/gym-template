@@ -14,10 +14,12 @@ export default function ActionButton({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="button"
       onPress={onPress}
-      style={({ pressed }) => [
+      style={({ pressed, hovered, focused }) => [
         styles.button,
         secondary ? styles.secondary : styles.primary,
         compact && styles.compact,
+        hovered && (secondary ? styles.secondaryHovered : styles.primaryHovered),
+        focused && styles.focused,
         pressed && styles.pressed,
       ]}
     >
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 9,
     borderWidth: 2,
-    borderRadius: 5,
+    borderRadius: 9,
   },
   compact: {
     minHeight: 44,
@@ -50,6 +52,16 @@ const styles = StyleSheet.create({
   secondary: {
     backgroundColor: 'transparent',
     borderColor: colors.white,
+  },
+  primaryHovered: {
+    backgroundColor: '#2954ce',
+    borderColor: '#2954ce',
+  },
+  secondaryHovered: {
+    backgroundColor: 'rgba(255,255,255,0.12)',
+  },
+  focused: {
+    borderColor: colors.yellow,
   },
   pressed: {
     opacity: 0.78,

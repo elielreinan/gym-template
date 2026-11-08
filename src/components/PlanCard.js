@@ -18,17 +18,17 @@ export default function PlanCard({ plan }) {
           <Text style={styles.vipBadgeText}>{plan.badge}</Text>
         </View>
       ) : null}
-      <Text style={[styles.name, plan.featured && styles.featuredName]}>{plan.name}</Text>
+      <Text style={[styles.name, plan.featured && styles.featuredName, plan.badge && styles.nameWithBadge]}>
+        {plan.name}
+      </Text>
       <Text style={[styles.description, plan.featured && styles.featuredDescription]}>
         {plan.description}
       </Text>
       <View style={styles.priceRow}>
         <Text style={styles.currency}>R$</Text>
         <Text style={[styles.price, plan.featured && styles.featuredPrice]}>{plan.price}</Text>
-        <View style={styles.priceDetails}>
-          <Text style={styles.currency}>,00</Text>
-          <Text style={styles.perMonth}>/mês</Text>
-        </View>
+        <Text style={styles.currency}>,00</Text>
+        <Text style={styles.perMonth}>/mês</Text>
       </View>
       <View style={styles.featureList}>
         {plan.features.map((feature) => (
@@ -42,9 +42,11 @@ export default function PlanCard({ plan }) {
         accessibilityLabel={`${plan.action} pelo WhatsApp`}
         accessibilityRole="button"
         onPress={() => openExternalLink(WHATSAPP_URL)}
-        style={({ pressed }) => [
+        style={({ pressed, hovered, focused }) => [
           styles.action,
           plan.featured ? styles.featuredAction : styles.outlinedAction,
+          hovered && styles.actionHovered,
+          focused && styles.actionFocused,
           pressed && styles.pressed,
         ]}
       >
@@ -116,6 +118,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 7,
   },
+  nameWithBadge: {
+    paddingRight: 60,
+  },
   featuredName: {
     color: colors.white,
     fontSize: 29,
@@ -143,7 +148,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Oswald-Bold',
     fontSize: 20,
     fontWeight: '800',
-    marginBottom: 8,
+    marginBottom: 11,
   },
   price: {
     color: colors.white,
@@ -157,15 +162,12 @@ const styles = StyleSheet.create({
     color: colors.yellow,
     fontSize: 73,
   },
-  priceDetails: {
-    marginLeft: 3,
-    marginBottom: 9,
-  },
   perMonth: {
     color: colors.muted,
     fontFamily: 'Inter-Regular',
     fontSize: 13,
-    marginTop: 3,
+    marginLeft: 4,
+    marginBottom: 11,
   },
   featureList: {
     gap: 16,
@@ -209,6 +211,12 @@ const styles = StyleSheet.create({
   },
   outlinedActionText: {
     color: colors.blueLight,
+  },
+  actionHovered: {
+    backgroundColor: 'rgba(147,197,253,0.15)',
+  },
+  actionFocused: {
+    borderColor: colors.yellow,
   },
   contactHint: {
     color: colors.muted,

@@ -71,30 +71,31 @@ export const FAQS = [
   {
     question: 'Quais atividades a Viver Bem oferece?',
     answer:
-      'Você encontra musculação, Pilates com fisioterapeutas e aulas coletivas em um só lugar.',
+      'A academia oferece musculação, Pilates com fisioterapeutas e aulas coletivas, como dança, GAP e funcional.',
   },
   {
     question: 'Como faço para me matricular?',
     answer:
-      'Fale com a equipe pelo WhatsApp para conhecer os planos e iniciar sua matrícula.',
+      'Confira os planos disponíveis na seção Planos e escolha o que combina com você. Pelo botão do plano, você pode falar com a equipe no WhatsApp para iniciar a matrícula.',
   },
   {
     question: 'Como agendo uma aula de Pilates?',
     answer:
-      'Entre em contato pelo WhatsApp para saber mais sobre os horários e agendar sua aula.',
+      'O plano Pilates 2X oferece duas aulas por semana com fisioterapeutas e inclui acesso à musculação. Para consultar disponibilidade e agendamento, entre em contato com a equipe.',
   },
   {
     question: 'Onde fica a academia?',
     answer:
-      'Estamos no bairro do Uruguai, em Salvador - BA. Consulte o endereço completo com a equipe pelo WhatsApp.',
+      'Estamos no bairro do Uruguai, em Salvador - BA. O mapa do site mostra o bairro; confirme o endereço completo com a equipe antes de visitar.',
   },
   {
     question: 'Quais são os horários das aulas e de funcionamento?',
     answer:
-      'Fale com a equipe pelo WhatsApp para consultar os horários atualizados das aulas e da academia.',
+      'Os horários atualizados ainda não estão disponíveis no site. Na seção Aulas e Horários, use o botão de consulta para verificar com a equipe os horários das atividades e de funcionamento.',
   },
   {
     question: 'Quais são as formas de pagamento?',
-    answer: 'Consulte as formas de pagamento e as condições dos planos com a equipe pelo WhatsApp.',
+    answer:
+      'As formas de pagamento não estão informadas no site. Consulte a equipe para confirmar as opções aceitas e as condições do plano escolhido antes de se matricular.',
   },
 ];

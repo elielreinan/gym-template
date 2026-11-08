@@ -1,7 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   ActivityIndicator,
+  Animated,
+  Easing,
   ImageBackground,
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -31,6 +34,7 @@ import SiteHeader from '../components/SiteHeader';
 import colors from '../theme/colors';
 import { FACILITIES, PLANS, WHATSAPP_URL } from '../data/siteContent';
 import openExternalLink from '../utils/openExternalLink';
+import useReducedMotion from '../hooks/useReducedMotion';
 
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=75&w=1200&auto=format&fit=crop';
@@ -47,7 +51,47 @@ export default function HomeScreen() {
   const { width } = useWindowDimensions();
   const scrollRef = useRef(null);
   const sectionPositions = useRef({});
+  const entrance = useRef(new Animated.Value(1)).current;
+  const accentSweep = useRef(new Animated.Value(0)).current;
+  const reducedMotion = useReducedMotion();
   const isWide = width >= 820;
+
+  useEffect(() => {
+    if (!fontsLoaded || reducedMotion) {
+      entrance.stopAnimation();
+      entrance.setValue(1);
+      return;
+    }
+
+    entrance.setValue(0);
+    const animation = Animated.timing(entrance, {
+      toValue: 1,
+      duration: 700,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: Platform.OS !== 'web',
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [entrance, fontsLoaded, reducedMotion]);
+
+  useEffect(() => {
+    if (!fontsLoaded || reducedMotion) {
+      accentSweep.stopAnimation();
+      accentSweep.setValue(0);
+      return;
+    }
+
+    const animation = Animated.loop(
+      Animated.timing(accentSweep, {
+        toValue: 1,
+        duration: 4000,
+        easing: Easing.linear,
+        useNativeDriver: Platform.OS !== 'web',
+      }),
+    );
+    animation.start();
+    return () => animation.stop();
+  }, [accentSweep, fontsLoaded, reducedMotion]);
 
   if (fontError) {
     throw fontError;
@@ -70,7 +114,7 @@ export default function HomeScreen() {
   const scrollToSection = (section) => {
     const position = sectionPositions.current[section];
     if (typeof position === 'number') {
-      scrollRef.current?.scrollTo({ y: Math.max(0, position - 72), animated: true });
+      scrollRef.current?.scrollTo({ y: Math.max(0, position - 72), animated: !reducedMotion });
     }
   };
 
@@ -94,7 +138,17 @@ export default function HomeScreen() {
               end={{ x: 1, y: 1 }}
               style={StyleSheet.absoluteFill}
             />
-            <View style={styles.heroContent}>
+            <Animated.View
+              style={[
+                styles.heroContent,
+                {
+                  opacity: entrance.interpolate({ inputRange: [0, 1], outputRange: [0.85, 1] }),
+                  transform: [
+                    { translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [16, 0] }) },
+                  ],
+                },
+              ]}
+            >
               <View style={styles.openBadge}>
                 <View style={styles.openDot} />
                 <Text style={styles.openBadgeText}>Inscrições Abertas</Text>
@@ -122,9 +176,39 @@ export default function HomeScreen() {
               <Text style={styles.heroNote}>
                 Visitas e horários: consulte nossa equipe pelo WhatsApp. Imagem ilustrativa.
               </Text>
-            </View>
-            <View style={styles.heroAccent} />
+            </Animated.View>
+            <View pointerEvents="none" style={styles.heroRing} />
           </ImageBackground>
+        </View>
+
+        <View style={styles.heroAccent}>
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              styles.heroAccentSweep,
+              {
+                transform: [
+                  {
+                    translateX: accentSweep.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [-240, width + 240],
+                    }),
+                  },
+                  { skewX: '-25deg' },
+                ],
+              },
+            ]}
+          >
+            <LinearGradient
+              colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0.38)', 'rgba(255,255,255,0)']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={StyleSheet.absoluteFill}
+            />
+          </Animated.View>
+          <FontAwesome5 color={colors.background} name="bolt" size={16} />
+          <Text style={styles.heroAccentText}>Seu treino. Sua evolução.</Text>
+          <FontAwesome5 color={colors.background} name="bolt" size={16} />
         </View>
 
         <View style={[styles.highlights, isWide && styles.highlightsWide]}>
@@ -132,8 +216,15 @@ export default function HomeScreen() {
             ['snowflake', '100% Climatizada', 'Treino no clima perfeito'],
             ['spa', 'Pilates com Fisioterapeutas', 'Cuidado profissional'],
             ['dumbbell', 'Equipamentos de Ponta', 'Máquinas de última geração'],
-          ].map(([icon, title, description]) => (
-            <View key={title} style={styles.highlightItem}>
+          ].map(([icon, title, description], index) => (
+            <View
+              key={title}
+              style={[
+                styles.highlightItem,
+                index === 2 && styles.highlightItemLast,
+                isWide && styles.highlightItemWide,
+              ]}
+            >
               <View style={styles.highlightIcon}>
                 <FontAwesome5 color={colors.yellow} name={icon} size={24} />
               </View>
@@ -333,20 +424,45 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.6,
   },
-  secondaryButtonText: {
-    color: colors.white,
+  heroRing: {
+    position: 'absolute',
+    width: 330,
+    height: 330,
+    right: -115,
+    top: 50,
+    borderRadius: 165,
+    borderWidth: 1,
+    borderColor: 'rgba(147,197,253,0.22)',
   },
   heroAccent: {
-    position: 'absolute',
-    bottom: 0,
-    right: -80,
-    width: '45%',
-    height: 14,
+    minHeight: 54,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 14,
     backgroundColor: colors.yellow,
-    transform: [{ skewX: '-35deg' }],
+    overflow: 'hidden',
+  },
+  heroAccentSweep: {
+    position: 'absolute',
+    left: 0,
+    top: -30,
+    bottom: -30,
+    width: 180,
+  },
+  heroAccentText: {
+    flexShrink: 1,
+    color: colors.background,
+    fontFamily: 'Oswald-Bold',
+    fontSize: 17,
+    letterSpacing: 1.2,
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
   highlights: {
-    marginTop: -22,
+    marginTop: 16,
     marginHorizontal: 16,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -372,6 +488,13 @@ const styles = StyleSheet.create({
     gap: 13,
     borderBottomColor: 'rgba(255,255,255,0.16)',
     borderBottomWidth: 1,
+  },
+  highlightItemLast: {
+    borderBottomWidth: 0,
+  },
+  highlightItemWide: {
+    borderBottomWidth: 0,
+    paddingHorizontal: 10,
   },
   highlightIcon: {
     width: 44,

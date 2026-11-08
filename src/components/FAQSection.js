@@ -1,12 +1,48 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SectionHeading from './SectionHeading';
 import colors from '../theme/colors';
 import { FAQS } from '../data/siteContent';
+import useReducedMotion from '../hooks/useReducedMotion';
+
+function FAQAnswer({ children, reducedMotion }) {
+  const entrance = useRef(new Animated.Value(reducedMotion ? 1 : 0)).current;
+
+  useEffect(() => {
+    if (reducedMotion) {
+      entrance.stopAnimation();
+      entrance.setValue(1);
+      return;
+    }
+
+    const animation = Animated.timing(entrance, {
+      toValue: 1,
+      duration: 220,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: Platform.OS !== 'web',
+    });
+    animation.start();
+    return () => animation.stop();
+  }, [entrance, reducedMotion]);
+
+  return (
+    <Animated.View
+      style={{
+        opacity: entrance.interpolate({ inputRange: [0, 1], outputRange: [0.85, 1] }),
+        transform: [
+          { translateY: entrance.interpolate({ inputRange: [0, 1], outputRange: [5, 0] }) },
+        ],
+      }}
+    >
+      <Text style={styles.answer}>{children}</Text>
+    </Animated.View>
+  );
+}
 
 export default function FAQSection() {
   const [expandedIndex, setExpandedIndex] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   return (
     <View style={styles.section}>
@@ -21,7 +57,7 @@ export default function FAQSection() {
           const expanded = expandedIndex === index;
 
           return (
-            <View key={item.question} style={styles.question}>
+            <View key={item.question} style={[styles.question, expanded && styles.questionExpanded]}>
               <Pressable
                 accessibilityRole="button"
                 accessibilityState={{ expanded }}
@@ -35,7 +71,7 @@ export default function FAQSection() {
                   size={23}
                 />
               </Pressable>
-              {expanded ? <Text style={styles.answer}>{item.answer}</Text> : null}
+              {expanded ? <FAQAnswer reducedMotion={reducedMotion}>{item.answer}</FAQAnswer> : null}
             </View>
           );
         })}
@@ -63,6 +99,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.1)',
     borderRadius: 12,
     backgroundColor: colors.surface,
+  },
+  questionExpanded: {
+    borderColor: 'rgba(147,197,253,0.55)',
+    backgroundColor: '#142b52',
   },
   questionButton: {
     minHeight: 34,

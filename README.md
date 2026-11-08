@@ -25,6 +25,7 @@
 - ⚡ **Experiência responsiva:** interface para web, Android e iOS, com navegação adaptada para telas menores.
 - 💬 **Contato simplificado:** consultas sobre planos, horários e visitas pelo WhatsApp.
 - 📍 **Localização:** link para o mapa do bairro Uruguai, em Salvador.
+- 🎨 **Interações acessíveis:** animações discretas respeitam a preferência do dispositivo por movimento reduzido.
 
 ---
 

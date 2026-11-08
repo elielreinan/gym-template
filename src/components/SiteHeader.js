@@ -31,7 +31,10 @@ export default function SiteHeader({ isWide, onNavigate }) {
               key={label}
               accessibilityRole="button"
               onPress={() => navigate(section)}
-              style={styles.navItem}
+              style={({ hovered, focused }) => [
+                styles.navItem,
+                (hovered || focused) && styles.navItemActive,
+              ]}
             >
               <Text style={styles.navText}>{label}</Text>
             </Pressable>
@@ -101,6 +104,11 @@ const styles = StyleSheet.create({
   },
   navItem: {
     paddingVertical: 11,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  navItemActive: {
+    borderBottomColor: colors.yellow,
   },
   navText: {
     color: colors.text,
@@ -113,9 +121,18 @@ const styles = StyleSheet.create({
     padding: 7,
   },
   mobileNavigation: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
     width: '100%',
     gap: 2,
-    paddingTop: 16,
+    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingBottom: 20,
+    backgroundColor: colors.background,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.12)',
+    elevation: 8,
   },
   mobileNavItem: {
     paddingVertical: 12,
