@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Viver Bem Fitness",
+    "slug": "viver-bem-fitness",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
