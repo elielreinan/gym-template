@@ -1,6 +1,6 @@
-# 🚀 Viver Bem Fitness
+# 🚀 Gym Fitness
 
-> Aplicativo e página de apresentação da academia Viver Bem Fitness, no bairro do Uruguai, em Salvador. Apresenta modalidades e planos e facilita o contato com a equipe pelo WhatsApp.
+> Modelo demonstrativo de aplicativo e página para academias, com modalidades, planos e informações personalizáveis para web, Android e iOS.
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-green.svg)
 ![Versão](https://img.shields.io/badge/vers%C3%A3o-1.0.0-orange.svg)
@@ -21,10 +21,10 @@
 
 ## 💡 Visão Geral
 
-- ✨ **Modalidades e planos:** informações sobre musculação, Pilates e aulas coletivas, com preços e benefícios.
+- ✨ **Modalidades e planos:** exemplos de musculação, Pilates e aulas coletivas, com planos personalizáveis.
 - ⚡ **Experiência responsiva:** interface para web, Android e iOS, com navegação adaptada para telas menores.
-- 💬 **Contato simplificado:** consultas sobre planos, horários e visitas pelo WhatsApp.
-- 📍 **Localização:** link para o mapa do bairro Uruguai, em Salvador.
+- 💬 **Contato configurável:** botões de WhatsApp e Instagram aparecem após a configuração dos links.
+- 📍 **Localização configurável:** endereço e link de mapa podem ser adicionados para cada academia.
 - 🎨 **Interações acessíveis:** animações discretas respeitam a preferência do dispositivo por movimento reduzido.
 
 ---
@@ -68,9 +68,14 @@ No terminal do Expo, pressione `a` para Android, `i` para iOS ou `w` para web. T
 
 ## 📝 Conteúdo e Atendimento
 
-Planos, modalidades e links estão em `src/data/siteContent.js`. As imagens atuais são ilustrativas e devem ser substituídas por fotos autorizadas da academia. Confirme valores e benefícios com a equipe antes da publicação.
+O conteúdo atual é demonstrativo: modalidades, planos e benefícios são exemplos, sem preços ou contatos reais. Antes de publicar:
 
-Os botões de planos, horários e visitas abrem o WhatsApp; eles não confirmam reservas nem processam pagamentos. Horários, formas de pagamento, endereço completo, equipe e avaliações devem ser adicionados somente com informações confirmadas. O mapa mostra o bairro, não o endereço exato.
+1. Personalize o nome, a identidade visual e os textos, inclusive o FAQ.
+2. Em `src/data/siteContent.js`, defina modalidades, planos, benefícios e preços confirmados. Os preços são exibidos em reais por mês, com centavos fixos em `,00`.
+3. Configure `WHATSAPP_URL`, `INSTAGRAM_URL`, `ADDRESS` e `MAP_URL` com os dados da academia. Enquanto os links estiverem como `null`, os respectivos botões não aparecem. A assinatura DevReds é independente desses contatos.
+4. Substitua as imagens ilustrativas por fotos autorizadas e informe horários, condições e formas de pagamento confirmadas.
+
+Os botões de contato, quando configurados, abrem links externos; eles não confirmam reservas nem processam pagamentos. O FAQ e os demais textos demonstrativos também devem ser atualizados para refletir os serviços realmente oferecidos.
 
 A versão web usa `public/index.html` para idioma e metadados. O conteúdo é renderizado no cliente e depende de JavaScript; para SEO mais completo, avalie renderização estática e faça testes após a publicação.
 

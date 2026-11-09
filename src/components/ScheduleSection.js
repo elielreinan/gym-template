@@ -21,18 +21,20 @@ export default function ScheduleSection() {
           <View key={item.title} style={styles.row}>
             <Ionicons color={colors.yellow} name="time-outline" size={22} />
             <Text style={styles.activity}>{item.title}</Text>
-            <Text style={styles.availability}>Consultar horários</Text>
+            <Text style={styles.availability}>A definir</Text>
           </View>
         ))}
         <Text style={styles.note}>
-          Consulte a equipe para conhecer os dias e horários atualizados das aulas e da academia.
+          Os dias e horários das atividades devem ser definidos pela academia.
         </Text>
-        <ActionButton
-          accessibilityLabel="Consultar horários pelo WhatsApp"
-          onPress={() => openExternalLink(WHATSAPP_URL)}
-        >
-          <Text style={styles.buttonText}>Consultar pelo WhatsApp</Text>
-        </ActionButton>
+        {WHATSAPP_URL ? (
+          <ActionButton
+            accessibilityLabel="Consultar horários pelo WhatsApp"
+            onPress={() => openExternalLink(WHATSAPP_URL)}
+          >
+            <Text style={styles.buttonText}>Consultar pelo WhatsApp</Text>
+          </ActionButton>
+        ) : null}
       </View>
     </View>
   );

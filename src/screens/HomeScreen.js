@@ -151,30 +151,31 @@ export default function HomeScreen() {
             >
               <View style={styles.openBadge}>
                 <View style={styles.openDot} />
-                <Text style={styles.openBadgeText}>Inscrições Abertas</Text>
+                <Text style={styles.openBadgeText}>Modelo demonstrativo</Text>
               </View>
               <Text style={[styles.heroTitle, isWide && styles.heroTitleWide]}>
-                Viver Bem é{'\n'}
-                <Text style={styles.heroTitleHighlight}>Para Você!</Text>
+                Seu espaço{'\n'}
+                <Text style={styles.heroTitleHighlight}>Para Evoluir!</Text>
               </Text>
               <Text style={styles.heroDescription}>
-                A estrutura mais completa do Uruguai, Salvador. Musculação, Pilates e Aulas
-                Coletivas com foco total nos seus resultados.
+                Um modelo de site para apresentar modalidades, planos e a estrutura da sua academia.
               </Text>
               <View style={[styles.heroActions, isWide && styles.heroActionsWide]}>
-                <ActionButton
-                  onPress={() => openExternalLink(WHATSAPP_URL)}
-                  accessibilityLabel="Consultar visita pelo WhatsApp"
-                >
-                  <FontAwesome5 color={colors.white} name="whatsapp" size={18} />
-                  <Text style={styles.buttonText}>Consultar visita</Text>
-                </ActionButton>
+                {WHATSAPP_URL ? (
+                  <ActionButton
+                    onPress={() => openExternalLink(WHATSAPP_URL)}
+                    accessibilityLabel="Consultar visita pelo WhatsApp"
+                  >
+                    <FontAwesome5 color={colors.white} name="whatsapp" size={18} />
+                    <Text style={styles.buttonText}>Consultar visita</Text>
+                  </ActionButton>
+                ) : null}
                 <ActionButton onPress={() => scrollToSection('plans')} secondary>
                   <Text style={styles.buttonText}>Ver Planos</Text>
                 </ActionButton>
               </View>
               <Text style={styles.heroNote}>
-                Visitas e horários: consulte nossa equipe pelo WhatsApp. Imagem ilustrativa.
+                Conteúdo e imagens ilustrativos. Personalize as informações para sua academia.
               </Text>
             </Animated.View>
             <View pointerEvents="none" style={styles.heroRing} />
@@ -213,9 +214,9 @@ export default function HomeScreen() {
 
         <View style={[styles.highlights, isWide && styles.highlightsWide]}>
           {[
-            ['snowflake', '100% Climatizada', 'Treino no clima perfeito'],
-            ['spa', 'Pilates com Fisioterapeutas', 'Cuidado profissional'],
-            ['dumbbell', 'Equipamentos de Ponta', 'Máquinas de última geração'],
+            ['dumbbell', 'Musculação', 'Treinos para seus objetivos'],
+            ['spa', 'Pilates', 'Movimento e bem-estar'],
+            ['users', 'Aulas coletivas', 'Energia para treinar em grupo'],
           ].map(([icon, title, description], index) => (
             <View
               key={title}
@@ -266,7 +267,7 @@ export default function HomeScreen() {
             eyebrow="Planos para cada objetivo"
             title="Escolha o"
             highlight="Seu Plano"
-            description="Mensalidades que cabem no seu bolso com estrutura de gigante."
+            description="Exemplos de planos que podem ser adaptados para sua academia."
           />
           <View style={[styles.planList, isWide && styles.planListWide]}>
             {PLANS.map((plan) => (
@@ -274,7 +275,7 @@ export default function HomeScreen() {
             ))}
           </View>
           <Text style={styles.planNote}>
-            Consulte a equipe sobre formas de pagamento, condições e valores atualizados.
+            Planos e benefícios ilustrativos. Defina valores e condições antes da publicação.
           </Text>
         </View>
 
@@ -288,15 +289,21 @@ export default function HomeScreen() {
             <Text style={styles.calloutEyebrow}>Seu próximo passo</Text>
             <Text style={styles.calloutTitle}>Vamos começar?</Text>
             <Text style={styles.calloutText}>
-              Tire suas dúvidas com a nossa equipe e encontre o plano que combina com você.
+              Personalize este modelo para apresentar sua academia e seus planos.
             </Text>
-            <ActionButton
-              onPress={() => openExternalLink(WHATSAPP_URL)}
-              accessibilityLabel="Conversar com a equipe pelo WhatsApp"
-            >
-              <FontAwesome5 color={colors.white} name="whatsapp" size={18} />
-              <Text style={styles.buttonText}>Fale com a equipe</Text>
-            </ActionButton>
+            {WHATSAPP_URL ? (
+              <ActionButton
+                onPress={() => openExternalLink(WHATSAPP_URL)}
+                accessibilityLabel="Conversar com a equipe pelo WhatsApp"
+              >
+                <FontAwesome5 color={colors.white} name="whatsapp" size={18} />
+                <Text style={styles.buttonText}>Fale com a equipe</Text>
+              </ActionButton>
+            ) : (
+              <ActionButton onPress={() => scrollToSection('plans')}>
+                <Text style={styles.buttonText}>Ver planos</Text>
+              </ActionButton>
+            )}
           </View>
           <View style={styles.calloutMark} />
         </View>

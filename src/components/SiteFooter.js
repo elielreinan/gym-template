@@ -4,7 +4,9 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import BrandLogo from './BrandLogo';
 import colors from '../theme/colors';
-import { DEVELOPER_INSTAGRAM_URL, INSTAGRAM_URL, MAP_URL, WHATSAPP_URL } from '../data/siteContent';
+import {
+  ADDRESS, DEVELOPER_INSTAGRAM_URL, INSTAGRAM_URL, MAP_URL, WHATSAPP_URL,
+} from '../data/siteContent';
 import openExternalLink from '../utils/openExternalLink';
 
 export default function SiteFooter({ isWide }) {
@@ -14,50 +16,57 @@ export default function SiteFooter({ isWide }) {
         <View style={styles.block}>
           <BrandLogo footer />
           <Text style={styles.description}>
-            A academia feita para você atingir resultados reais com a melhor estrutura.
+            Um modelo de site para apresentar sua academia e conectar pessoas ao movimento.
           </Text>
         </View>
         <View style={styles.block}>
           <Text style={styles.heading}>Endereço</Text>
           <View style={styles.addressRow}>
             <Ionicons color={colors.yellow} name="location" size={19} />
-            <Text style={styles.text}>Uruguai, Salvador - BA</Text>
+            <Text style={styles.text}>{ADDRESS || 'Endereço a definir'}</Text>
           </View>
-          <Text style={styles.text}>Venha nos fazer uma visita!</Text>
-          <Pressable
-            accessibilityRole="link"
-            accessibilityLabel="Ver o bairro Uruguai no Google Maps"
-            onPress={() => openExternalLink(MAP_URL)}
-            style={styles.mapLink}
-          >
-            <Text style={styles.mapLinkText}>Ver o bairro no mapa</Text>
-          </Pressable>
-          <Text style={styles.text}>Endereço completo e horários: consulte pelo WhatsApp.</Text>
+          {MAP_URL ? (
+            <Pressable
+              accessibilityRole="link"
+              accessibilityLabel="Ver endereço no Google Maps"
+              onPress={() => openExternalLink(MAP_URL)}
+              style={styles.mapLink}
+            >
+              <Text style={styles.mapLinkText}>Ver no mapa</Text>
+            </Pressable>
+          ) : null}
+          <Text style={styles.text}>Horários de funcionamento a definir.</Text>
         </View>
         <View style={styles.block}>
           <Text style={styles.heading}>Conecte-se</Text>
-          <View style={styles.socialLinks}>
-            <Pressable
-              accessibilityLabel="WhatsApp"
-              accessibilityRole="link"
-              onPress={() => openExternalLink(WHATSAPP_URL)}
-              style={styles.socialButton}
-            >
-              <FontAwesome5 color={colors.white} name="whatsapp" size={22} />
-            </Pressable>
-            <Pressable
-              accessibilityLabel="Instagram"
-              accessibilityRole="link"
-              onPress={() => openExternalLink(INSTAGRAM_URL)}
-              style={styles.socialButton}
-            >
-              <FontAwesome5 color={colors.white} name="instagram" size={22} />
-            </Pressable>
-          </View>
+          {WHATSAPP_URL || INSTAGRAM_URL ? (
+            <View style={styles.socialLinks}>
+              {WHATSAPP_URL ? (
+                <Pressable
+                  accessibilityLabel="WhatsApp"
+                  accessibilityRole="link"
+                  onPress={() => openExternalLink(WHATSAPP_URL)}
+                  style={styles.socialButton}
+                >
+                  <FontAwesome5 color={colors.white} name="whatsapp" size={22} />
+                </Pressable>
+              ) : null}
+              {INSTAGRAM_URL ? (
+                <Pressable
+                  accessibilityLabel="Instagram"
+                  accessibilityRole="link"
+                  onPress={() => openExternalLink(INSTAGRAM_URL)}
+                  style={styles.socialButton}
+                >
+                  <FontAwesome5 color={colors.white} name="instagram" size={22} />
+                </Pressable>
+              ) : null}
+            </View>
+          ) : <Text style={styles.text}>Contatos a definir.</Text>}
         </View>
       </View>
       <Text style={styles.copyright}>
-        © 2026 Viver Bem Fitness. Todos os direitos reservados.
+        Gym Fitness · Modelo demonstrativo.
       </Text>
       <Pressable
         accessibilityLabel="Instagram da DevReds"

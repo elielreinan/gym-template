@@ -6,9 +6,9 @@ export default function BrandLogo({ footer = false }) {
   return (
     <View style={styles.logo}>
       <View style={styles.logoMark}>
-        <Text style={styles.logoInitials}>VB</Text>
+        <Text style={styles.logoInitials}>GF</Text>
       </View>
-      <Text style={[styles.logoName, footer && styles.logoNameFooter]}>Viver Bem</Text>
+      <Text style={[styles.logoName, footer && styles.logoNameFooter]}>Gym Fitness</Text>
     </View>
   );
 }

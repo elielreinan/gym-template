@@ -6,6 +6,8 @@ import colors from '../theme/colors';
 import openExternalLink from '../utils/openExternalLink';
 
 export default function FloatingContact() {
+  if (!WHATSAPP_URL) return null;
+
   return (
     <Pressable
       accessibilityLabel="Falar com a academia pelo WhatsApp"

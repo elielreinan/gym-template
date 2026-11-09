@@ -24,12 +24,16 @@ export default function PlanCard({ plan }) {
       <Text style={[styles.description, plan.featured && styles.featuredDescription]}>
         {plan.description}
       </Text>
-      <View style={styles.priceRow}>
-        <Text style={styles.currency}>R$</Text>
-        <Text style={[styles.price, plan.featured && styles.featuredPrice]}>{plan.price}</Text>
-        <Text style={styles.currency}>,00</Text>
-        <Text style={styles.perMonth}>/mês</Text>
-      </View>
+      {plan.price ? (
+        <View style={styles.priceRow}>
+          <Text style={styles.currency}>R$</Text>
+          <Text style={[styles.price, plan.featured && styles.featuredPrice]}>{plan.price}</Text>
+          <Text style={styles.currency}>,00</Text>
+          <Text style={styles.perMonth}>/mês</Text>
+        </View>
+      ) : (
+        <Text style={styles.pricePlaceholder}>Valor a definir</Text>
+      )}
       <View style={styles.featureList}>
         {plan.features.map((feature) => (
           <View key={feature} style={styles.featureRow}>
@@ -38,23 +42,25 @@ export default function PlanCard({ plan }) {
           </View>
         ))}
       </View>
-      <Pressable
-        accessibilityLabel={`${plan.action} pelo WhatsApp`}
-        accessibilityRole="button"
-        onPress={() => openExternalLink(WHATSAPP_URL)}
-        style={({ pressed, hovered, focused }) => [
-          styles.action,
-          plan.featured ? styles.featuredAction : styles.outlinedAction,
-          hovered && styles.actionHovered,
-          focused && styles.actionFocused,
-          pressed && styles.pressed,
-        ]}
-      >
-        <Text style={[styles.actionText, !plan.featured && styles.outlinedActionText]}>
-          {plan.action}
-        </Text>
-      </Pressable>
-      <Text style={styles.contactHint}>Atendimento e matrícula pelo WhatsApp</Text>
+      {WHATSAPP_URL ? (
+        <Pressable
+          accessibilityLabel={`${plan.action} pelo WhatsApp`}
+          accessibilityRole="button"
+          onPress={() => openExternalLink(WHATSAPP_URL)}
+          style={({ pressed, hovered, focused }) => [
+            styles.action,
+            plan.featured ? styles.featuredAction : styles.outlinedAction,
+            hovered && styles.actionHovered,
+            focused && styles.actionFocused,
+            pressed && styles.pressed,
+          ]}
+        >
+          <Text style={[styles.actionText, !plan.featured && styles.outlinedActionText]}>
+            {plan.action}
+          </Text>
+        </Pressable>
+      ) : null}
+      {WHATSAPP_URL ? <Text style={styles.contactHint}>Atendimento pelo WhatsApp</Text> : null}
     </View>
   );
 }
@@ -168,6 +174,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginLeft: 4,
     marginBottom: 11,
+  },
+  pricePlaceholder: {
+    minHeight: 77,
+    marginBottom: 22,
+    color: colors.yellow,
+    fontFamily: 'Oswald-Bold',
+    fontSize: 24,
+    textTransform: 'uppercase',
   },
   featureList: {
     gap: 16,

@@ -39,13 +39,15 @@ export default function SiteHeader({ isWide, onNavigate }) {
               <Text style={styles.navText}>{label}</Text>
             </Pressable>
           ))}
-          <ActionButton
-            compact
-            onPress={() => openExternalLink(WHATSAPP_URL)}
-            accessibilityLabel="Consultar matrícula pelo WhatsApp"
-          >
-            <Text style={styles.buttonText}>Consultar matrícula</Text>
-          </ActionButton>
+          {WHATSAPP_URL ? (
+            <ActionButton
+              compact
+              onPress={() => openExternalLink(WHATSAPP_URL)}
+              accessibilityLabel="Consultar matrícula pelo WhatsApp"
+            >
+              <Text style={styles.buttonText}>Consultar matrícula</Text>
+            </ActionButton>
+          ) : null}
         </View>
       ) : (
         <Pressable
@@ -70,13 +72,15 @@ export default function SiteHeader({ isWide, onNavigate }) {
               <Text style={styles.navText}>{label}</Text>
             </Pressable>
           ))}
-          <ActionButton
-            compact
-            onPress={() => openExternalLink(WHATSAPP_URL)}
-            accessibilityLabel="Consultar matrícula pelo WhatsApp"
-          >
-            <Text style={styles.buttonText}>Consultar matrícula</Text>
-          </ActionButton>
+          {WHATSAPP_URL ? (
+            <ActionButton
+              compact
+              onPress={() => openExternalLink(WHATSAPP_URL)}
+              accessibilityLabel="Consultar matrícula pelo WhatsApp"
+            >
+              <Text style={styles.buttonText}>Consultar matrícula</Text>
+            </ActionButton>
+          ) : null}
         </View>
       ) : null}
     </View>

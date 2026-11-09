@@ -1,8 +1,8 @@
-export const WHATSAPP_URL = 'https://wa.me/message/WFJOLOJCSOQ7H1';
-export const INSTAGRAM_URL = 'https://www.instagram.com/viverbem.fitness';
+export const WHATSAPP_URL = null;
+export const INSTAGRAM_URL = null;
 export const DEVELOPER_INSTAGRAM_URL = 'https://www.instagram.com/dev.reds/';
-export const MAP_URL =
-  'https://www.google.com/maps/search/?api=1&query=Uruguai%2C%20Salvador%20-%20BA';
+export const MAP_URL = null;
+export const ADDRESS = null;
 
 export const FACILITIES = [
   {
@@ -14,14 +14,14 @@ export const FACILITIES = [
   },
   {
     title: 'Pilates',
-    description: 'Estúdio exclusivo com fisioterapeutas dedicados ao seu bem-estar.',
+    description: 'Uma modalidade para desenvolver força, equilíbrio e consciência corporal.',
     icon: 'spa',
     image:
       'https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=75&w=900&auto=format&fit=crop',
   },
   {
     title: 'Aulas Coletivas',
-    description: 'Salas amplas para dança, GAP, funcional e muito mais.',
+    description: 'Atividades em grupo para tornar a rotina de treinos mais dinâmica.',
     icon: 'users',
     image:
       'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=75&w=900&auto=format&fit=crop',
@@ -32,70 +32,65 @@ export const PLANS = [
   {
     name: 'Plano Mensal',
     description: 'Liberdade para treinar sem compromisso longo.',
-    price: '149',
+    price: null,
     features: [
-      'Acesso livre à área de musculação',
-      'Participação nas aulas coletivas',
-      'Ambiente 100% climatizado',
+      'Benefícios a definir',
+      'Modalidades a definir',
     ],
     action: 'Consultar Mensal',
   },
   {
     name: 'Plano Semestral',
-    description: 'A melhor escolha para quem foca em resultado.',
-    price: '99',
+    description: 'Uma opção para quem busca continuidade.',
+    price: null,
     features: [
-      'Tudo do plano mensal',
-      'Acompanhamento Premium',
-      'Sem taxa de matrícula',
-      'Desconto exclusivo',
+      'Benefícios a definir',
+      'Condições a definir',
     ],
     action: 'Consultar Semestral',
     featured: true,
   },
   {
-    name: 'Pilates 2X',
-    description: '2 vezes na semana com fisioterapeutas.',
-    price: '159',
+    name: 'Plano Pilates',
+    description: 'Uma opção dedicada ao seu bem-estar.',
+    price: null,
     features: [
-      'Aulas exclusivas de Pilates',
-      'Atendimento personalizado',
-      'BÔNUS: Acesso LIVRE à academia de musculação!',
+      'Frequência a definir',
+      'Benefícios a definir',
     ],
     action: 'Consultar Pilates',
-    badge: 'VIBE VIP',
   },
 ];
 
 export const FAQS = [
   {
-    question: 'Quais atividades a Viver Bem oferece?',
+    question: 'Quais atividades estão disponíveis?',
     answer:
-      'A academia oferece musculação, Pilates com fisioterapeutas e aulas coletivas, como dança, GAP e funcional.',
+      'Musculação, Pilates e aulas coletivas são exemplos de modalidades neste modelo. A lista deve ser adaptada à academia.',
   },
   {
     question: 'Como faço para me matricular?',
     answer:
-      'Confira os planos disponíveis na seção Planos e escolha o que combina com você. Pelo botão do plano, você pode falar com a equipe no WhatsApp para iniciar a matrícula.',
+      'Este modelo ainda não possui matrícula online. Configure os contatos e informe o processo de matrícula antes de publicá-lo.',
   },
   {
     question: 'Como agendo uma aula de Pilates?',
     answer:
-      'O plano Pilates 2X oferece duas aulas por semana com fisioterapeutas e inclui acesso à musculação. Para consultar disponibilidade e agendamento, entre em contato com a equipe.',
+      'O agendamento não está configurado neste modelo. Informe os horários e o canal de atendimento da academia para orientar os visitantes.',
   },
   {
     question: 'Onde fica a academia?',
     answer:
-      'Estamos no bairro do Uruguai, em Salvador - BA. O mapa do site mostra o bairro; confirme o endereço completo com a equipe antes de visitar.',
+      'O endereço ainda não foi configurado. Adicione a localização e o link do mapa antes de publicar o site.',
   },
   {
     question: 'Quais são os horários das aulas e de funcionamento?',
     answer:
-      'Os horários atualizados ainda não estão disponíveis no site. Na seção Aulas e Horários, use o botão de consulta para verificar com a equipe os horários das atividades e de funcionamento.',
+      'Os horários das aulas e de funcionamento devem ser preenchidos conforme a rotina da academia.',
   },
   {
     question: 'Quais são as formas de pagamento?',
     answer:
-      'As formas de pagamento não estão informadas no site. Consulte a equipe para confirmar as opções aceitas e as condições do plano escolhido antes de se matricular.',
+      'As formas de pagamento e as condições dos planos ainda precisam ser definidas para esta demonstração.',
   },
 ];
