@@ -50,10 +50,10 @@
 
 ```bash
 # Clone o repositório
-git clone https://github.com/elielreinan/gym-template.git
+git clone https://github.com/elielreinan/template-gym.git
 
 # Acesse a pasta do projeto
-cd gym-template
+cd template-gym
 
 # Instale as dependências
 npm install
